@@ -1,27 +1,24 @@
-/*
-login page
-on this page user can login into the app with email and pw
-
-Once user is successfully log in, they will be redirected to the homepage
-if user doesn't have an account they can go to the register page from here.
- */
-
 import 'package:flutter/material.dart';
-import 'package:untitled/features/auth/presentation/components/my_button.dart';
-import 'package:untitled/features/auth/presentation/components/my_text_field.dart';
 
-class LoginPage extends StatefulWidget {
+import '../components/my_button.dart';
+import '../components/my_text_field.dart';
+
+
+class RegisterPage extends StatefulWidget {
   final void Function()? togglePages;
-  const LoginPage({super.key, required this.togglePages,});
+  const RegisterPage({super.key, required this.togglePages});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   // text controllers
+  final nameController = TextEditingController();
   final emailController = TextEditingController();
   final pwController = TextEditingController();
+  final confirmPwController = TextEditingController();
+
 
 
   // Build UI
@@ -46,8 +43,8 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 50,),
 
-                // welcome back msg
-                Text("Welcome back, you've been missed!",
+                // Create an account
+                Text("Create an account, Join Us",
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.primary,
                     fontSize: 16,
@@ -56,40 +53,63 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 25,),
 
+                // name textfield
+                MyTextField(
+                  controller: nameController,
+                  obscureText: false,
+                  hintText: "Name",
+                ),
+
+                const SizedBox(height: 25,),
+
                 // email textfield
                 MyTextField(
-                    controller: emailController,
-                    obscureText: false,
-                    hintText: "Email",
+                  controller: emailController,
+                  obscureText: false,
+                  hintText: "Email",
                 ),
-                 const SizedBox(height: 10,),
+
+                const SizedBox(height: 10,),
+
                 // pw textfield
                 MyTextField(
                   controller: pwController,
                   obscureText: true,
                   hintText: "Password",
                 ),
-                const SizedBox(height: 25,),
-                // login button
-                MyButton(
-                    onTap: (){},
-                    text: "Login",
+                const SizedBox(height: 10,),
+
+                // confirm pw textfield
+                MyTextField(
+                  controller: confirmPwController,
+                  obscureText: true,
+                  hintText: "Confirm Password",
                 ),
+
+                const SizedBox(height: 25,),
+
+                // register button
+                MyButton(
+                  onTap: (){},
+                  text: "Register",
+                ),
+
                 const SizedBox(height: 50,),
-                // not a member? register now
+
+                // Already a member, Login in Now
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Not a member?",
+                    Text("Already a Member?",
                       style: TextStyle(
                           color: Theme.of(context).colorScheme.primary
                       ),
                     ),
                     GestureDetector(
                       onTap: widget.togglePages ,
-                      child: Text("Register Now!",
+                      child: Text("Login Now!",
                         style: TextStyle(
-                            color: Theme.of(context).colorScheme.inversePrimary,
+                          color: Theme.of(context).colorScheme.inversePrimary,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
